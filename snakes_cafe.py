@@ -33,50 +33,48 @@ def display_menu():
   """Displays the menu of options
   """
 
-    for item in MENU:
+  for item in MENU:
       print(item)
       print('-' * len(item))
       for j in range(len(MENU[item])):
         if j % 2 == 0:
           print(MENU[item][j])
       print('\n')
-      # Because of the list structure, iterating by every other element grabs the named items
+    # Because of the list structure, iterating by every other element grabs the named items
 
 def order_prompt():
   """Once the menu is fully displayed, this function prompts the user to order
   """
 
-    prompt = 'What would you like to order?'
+  prompt = 'What would you like to order?'
 
-    print(dedent(f'''
-    {'*' * WIDTH}
-    {('**' + ' ' * ((WIDTH - len(prompt)) // 2 - 2)) + prompt + (' ' * ((WIDTH - len(prompt)) // 2 - 2) + '**')}
-    {'*' * WIDTH}
+  print(dedent(f'''
+  {'*' * WIDTH}
+  {('**' + ' ' * ((WIDTH - len(prompt)) // 2 - 2)) + prompt + (' ' * ((WIDTH - len(prompt)) // 2 - 2) + '**')}
+  {'*' * WIDTH}
   '''))
 
 def order(user_order):
   """This function takes in the user's order, incrementing the appropriate field in the list (which is always the entry after the item ordered)
   """
 
-    if user_order.lower() == 'quit':
-        exit()
+  if user_order.lower() == 'quit':
+      exit()
 
-    for item in MENU:
-      for j in range(len(MENU[item])):
-        if j % 2 == 0 and user_order == MENU[item][j]:
-          MENU[item][j + 1] += 1
-          if MENU[item][j + 1] == 1:
-            print('\n', '**', MENU[item][j + 1], 'order of', MENU[item][j], 'has been added to your meal', '**', '\n')
-          else:
-            print('\n', '**', MENU[item][j + 1], 'orders of', MENU[item][j], 'have been added to your meal', '**', '\n')
-
-            {('**' + ' ' * ((WIDTH - len(line_one)) // 2 - 2)) + line_one + (' ' * ((WIDTH - len(line_one)) // 2 - 2) + '**')}
-            # Depending on whether the item has been ordered previously, the response looks a little different
+  for item in MENU:
+    for j in range(len(MENU[item])):
+      if j % 2 == 0 and user_order == MENU[item][j]:
+        MENU[item][j + 1] += 1
+        if MENU[item][j + 1] == 1:
+          print('\n', '**', MENU[item][j + 1], 'order of', MENU[item][j], 'has been added to your meal', '**', '\n')
+        else:
+          print('\n', '**', MENU[item][j + 1], 'orders of', MENU[item][j], 'have been added to your meal', '**', '\n')
+        # Depending on whether the item has been ordered previously, the response looks a little different
 
 def exit():
   """Exits
   """
-    sys.exit()
+  sys.exit()
 
 def run():
   """Wraps the rest of the functions and runs the program
