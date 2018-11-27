@@ -12,7 +12,7 @@ MENU = {
 # (among other options) would be more iterable
 
 def greeting():
-  """Function to greet the user
+  """Greets the user and provides instructions
   """
   line_one = 'Welcome to the Snakes Cafe!'
   line_two = 'Please see our menu below.'
@@ -27,8 +27,12 @@ def greeting():
     {('**' + ' ' * ((WIDTH - len(line_four)) // 2 - 2)) + line_four + (' ' * ((WIDTH - len(line_four)) // 2 - 2) + '**')}
     {'*' * WIDTH}
   '''))
+  #Dedenting blatantly copied from the demo code
 
 def display_menu():
+  """Displays the menu of options
+  """
+
     for item in MENU:
       print(item)
       print('-' * len(item))
@@ -36,8 +40,11 @@ def display_menu():
         if j % 2 == 0:
           print(MENU[item][j])
       print('\n')
+      # Because of the list structure, iterating by every other element grabs the named items
 
 def order_prompt():
+  """Once the menu is fully displayed, this function prompts the user to order
+  """
 
     prompt = 'What would you like to order?'
 
@@ -48,6 +55,9 @@ def order_prompt():
   '''))
 
 def order(user_order):
+  """This function takes in the user's order, incrementing the appropriate field in the list (which is always the entry after the item ordered)
+  """
+
     if user_order.lower() == 'quit':
         exit()
 
@@ -61,15 +71,20 @@ def order(user_order):
             print('\n', '**', MENU[item][j + 1], 'orders of', MENU[item][j], 'have been added to your meal', '**', '\n')
 
             {('**' + ' ' * ((WIDTH - len(line_one)) // 2 - 2)) + line_one + (' ' * ((WIDTH - len(line_one)) // 2 - 2) + '**')}
+            # Depending on whether the item has been ordered previously, the response looks a little different
 
 def exit():
+  """Exits
+  """
     sys.exit()
 
 def run():
+  """Wraps the rest of the functions and runs the program
+  """
   greeting()
   display_menu()
   order_prompt()
-  while True:
+  while True: #probably dangerous, but it works
     order(input())
 
 
