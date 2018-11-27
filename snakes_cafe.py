@@ -2,23 +2,14 @@ from textwrap import dedent
 import sys
 
 WIDTH = 60
-MENU = [
-  {
-    'appetizer': 'Poutine',
-    'number_ordered': 0,
-    'type': 'appetizer',
-  },
-  {
-    'appetizer': 'Jalapeno Poppers',
-    'number_ordered': 0,
-    'type': 'appetizer'
-  },
-  {
-    'appetizer': 'Hummus Plate',
-    'number_ordered': 0,
-    'type': 'appetizer'
-  },
-]
+MENU = {
+  'Appetizers': ['Poutine', 0, 'Jalapeno Poppers', 0, 'Hummus', 0],
+  'Entrees': ['Salmon', 0, 'Steak', 0, 'Hamburger', 0],
+  'Desserts': ['Cheesecake', 0, 'Chocolate Cake', 0, 'Peanut Butter Ice Cream', 0],
+  'Drinks': ['Coffee', 0, 'Tea', 0, 'Beer', 0]
+}
+# I originally had a list of dictionaries, as in today's demo, but Scott advised me that a dictionary of lists
+# (among other options) would be more iterable
 
 def greeting():
   """Function to greet the user
@@ -38,11 +29,13 @@ def greeting():
   '''))
 
 def display_menu():
-    print('Appetizers')
-    print('----------')
     for item in MENU:
-        if item['appetizer']:
-            print(item['appetizer'])
+      print(item)
+      print('-' * len(item))
+      for j in range(len(MENU[item])):
+        if j % 2 == 0:
+          print(MENU[item][j])
+      print('\n')
 
 def order_prompt():
 
@@ -59,12 +52,15 @@ def order(user_order):
         exit()
 
     for item in MENU:
-      if item['appetizer'] == user_order:
-        item['number_ordered'] += 1
-        if item['number_ordered'] == 1:
-          print('\n', '**', item['number_ordered'], 'order of', item['appetizer'], 'has been added to your meal', '**', '\n')
-          return
-        print('\n', '**', item['number_ordered'], 'orders of', item['appetizer'], 'have been added to your meal', '**', '\n')
+      for j in range(len(MENU[item])):
+        if j % 2 == 0 and user_order == MENU[item][j]:
+          MENU[item][j + 1] += 1
+          if MENU[item][j + 1] == 1:
+            print('\n', '**', MENU[item][j + 1], 'order of', MENU[item][j], 'has been added to your meal', '**', '\n')
+          else:
+            print('\n', '**', MENU[item][j + 1], 'orders of', MENU[item][j], 'have been added to your meal', '**', '\n')
+
+            {('**' + ' ' * ((WIDTH - len(line_one)) // 2 - 2)) + line_one + (' ' * ((WIDTH - len(line_one)) // 2 - 2) + '**')}
 
 def exit():
     sys.exit()
