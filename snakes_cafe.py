@@ -61,9 +61,11 @@ def order(user_order):
   if user_order.lower() == 'quit':
       exit()
 
+
+
   for item in MENU:
     for j in range(len(MENU[item])):
-      if j % 2 == 0 and user_order == MENU[item][j]:
+      if j % 2 == 0 and user_order == MENU[item][j].lower():
         MENU[item][j + 1] += 1
         if MENU[item][j + 1] == 1:
           print('\n', '**', MENU[item][j + 1], 'order of', MENU[item][j], 'has been added to your meal', '**', '\n')
@@ -79,11 +81,16 @@ def exit():
 def run():
   """Wraps the rest of the functions and runs the program
   """
-  greeting()
-  display_menu()
-  order_prompt()
-  while True: #probably dangerous, but it works
-    order(input())
+
+  try:
+    greeting()
+    display_menu()
+    order_prompt()
+    while True: #probably dangerous, but it works
+      order(input().lower())
+
+  except KeyboardInterrupt:
+      exit()
 
 
 if __name__ == '__main__':
